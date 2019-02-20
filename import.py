@@ -1,4 +1,3 @@
-
 import pandas as pd
 from urllib import request
 from pandas.io.json import json_normalize
@@ -163,3 +162,22 @@ sorted_data = import_data.sort_values('period', ascending = True)
 sorted_data['unit'].plot.bar(figsize=(20,18),x = sorted_data['period'], y = import_data['unit'])
 
 sorted_data.describe()
+
+#find the beginning & ending periods
+
+sorted_data.head() # starts 01.2009
+sorted_data.tail() # ends   11.2018
+
+
+#load 	Europe_Brent_Spot_Price_FOB.csv (source eia.gov)
+
+   
+spot_price = pd.read_csv('/Users/VyHo/Desktop/Europe_Brent_Spot_Price_FOB.csv',names = ['period','price'])
+
+# filter prices from periods that match import periods
+#weight > 70 and weight < 74
+
+spot_price.filter(spot_price['period'] < 1/1/2009) #date format is M/D/YYYY
+
+# making sure date data types have the desired format
+
